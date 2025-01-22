@@ -1,24 +1,39 @@
 {
-  "name": "bun.db",
-  "version": "1.0.1",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "license": "MIT",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "./build.sh",
-    "lint": "biome check lib",
-    "test": "bun test"
-  },
-  "devDependencies": {
-    "typescript": "^5.3.3",
-    "@biomejs/biome": "^1.5.2",
-    "@types/bun": "latest"
-  },
-  "dependencies": {
-    "quick.db": "^9.1.7"
-  }
+	"name": "bun.db",
+	"version": "2.0.0",
+	"description": "A wrapper of quick.db for Bun.",
+	"license": "GPL-3.0-only",
+	"type": "module",
+	"files": ["dist"],
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		"*": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"dev": "nodemon -w lib/ -e ts --exec bun test",
+		"build:lib": "bun run build.ts",
+		"build:docs": "typedoc --options typedoc.json",
+		"build": "bun build:lib && bun build:docs"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/bun": "1.2.0",
+		"nodemon": "3.1.9",
+		"typedoc-github-theme": "0.2.1"
+	},
+	"dependencies": {
+		"quick.db": "9.1.7"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/itss0n1c/bun.db.git"
+	},
+	"bugs": {
+		"url": "https://github.com/itss0n1c/bun.db/issues"
+	},
+	"homepage": "https://s0n1c.ca/bun.db"
 }
