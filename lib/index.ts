@@ -1,5 +1,5 @@
 import { Database } from 'bun:sqlite';
-import { IDriver, QuickDB } from 'quick.db';
+import { type IDriver, QuickDB } from 'quick.db';
 
 class BunSqliteDriver implements IDriver {
 	private static instance: BunSqliteDriver | null = null;
@@ -14,9 +14,7 @@ class BunSqliteDriver implements IDriver {
 	}
 
 	public static createSingleton(path: string): BunSqliteDriver {
-		if (!BunSqliteDriver.instance) {
-			BunSqliteDriver.instance = new BunSqliteDriver(path);
-		}
+		if (!BunSqliteDriver.instance) BunSqliteDriver.instance = new BunSqliteDriver(path);
 		return BunSqliteDriver.instance;
 	}
 
@@ -26,16 +24,10 @@ class BunSqliteDriver implements IDriver {
 
 	public async getAllRows(table: string): Promise<{ id: string; value: unknown }[]> {
 		const prep = this._database.prepare<{ ID: string; json: string }, []>(`SELECT * FROM ${table}`);
-		const data = [];
-
-		for (const row of prep.all()) {
-			data.push({
-				id: row.ID,
-				value: JSON.parse(row.json),
-			});
-		}
-
-		return data;
+		return prep.all().map((r) => ({
+			id: r.ID,
+			value: JSON.parse(r.json),
+		}));
 	}
 
 	public async getRowByKey<T>(table: string, key: string): Promise<[T | null, boolean]> {
@@ -45,7 +37,6 @@ class BunSqliteDriver implements IDriver {
 			ID: string;
 			json: string;
 		};
-
 		return value != null ? [JSON.parse(value.json), true] : [null, false];
 	}
 
@@ -53,27 +44,16 @@ class BunSqliteDriver implements IDriver {
 		const prep = this._database.prepare<{ ID: string; json: string }, []>(
 			`SELECT * FROM ${table} WHERE ID LIKE '${query}%'`,
 		);
-
-		const data = [];
-
-		for (const row of prep.all()) {
-			data.push({
-				id: row.ID,
-				value: JSON.parse(row.json),
-			});
-		}
-
-		return data;
+		return prep.all().map((r) => ({
+			id: r.ID,
+			value: JSON.parse(r.json),
+		}));
 	}
 
 	public async setRowByKey<T>(table: string, key: string, value: unknown, update: boolean): Promise<T> {
 		const stringifiedJson = JSON.stringify(value);
-		if (update) {
-			this._database.prepare(`UPDATE ${table} SET json = (?) WHERE ID = (?)`).run(stringifiedJson, key);
-		} else {
-			this._database.prepare(`INSERT INTO ${table} (ID,json) VALUES (?,?)`).run(key, stringifiedJson);
-		}
-
+		if (update) this._database.prepare(`UPDATE ${table} SET json = (?) WHERE ID = (?)`).run(stringifiedJson, key);
+		else this._database.prepare(`INSERT INTO ${table} (ID,json) VALUES (?,?)`).run(key, stringifiedJson);
 		return value as T;
 	}
 

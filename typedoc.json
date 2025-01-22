@@ -1,0 +1,25 @@
+{
+	"entryPoints": ["lib/index.ts"],
+	"out": "docs",
+	"plugin": ["typedoc-github-theme"],
+	"excludeExternals": true,
+	"externalSymbolLinkMappings": {
+		"bun-types": {
+			"*": "https://bun.sh/docs"
+		},
+		"@types/node": {
+			"*": "https://bun.sh/docs/runtime/nodejs-apis"
+		},
+		"typescript": {
+			"Promise": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+		},
+		"quick.db": {
+			"*": "https://quickdb.js.org"
+		}
+	},
+	"navigationLinks": {
+		"GitHub": "https://github.com/itss0n1c/bun.db",
+		"S0n1c": "https://s0n1c.ca"
+	},
+	"sort": ["documents-first", "kind"]
+}
