@@ -1,6 +1,6 @@
 {
 	"name": "bun.db",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "A wrapper of quick.db for Bun.",
 	"license": "GPL-3.0-only",
 	"type": "module",
@@ -8,21 +8,20 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"exports": {
-		"*": {
+		".": {
 			"import": "./dist/index.js",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"dev": "nodemon -w lib/ -e ts --exec bun test",
+		"dev": "bun test --watch",
 		"build:lib": "bun run build.ts",
 		"build:docs": "typedoc --options typedoc.json",
 		"build": "bun build:lib && bun build:docs"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "1.2.0",
-		"nodemon": "3.1.9",
+		"@types/bun": "1.2.8",
 		"typedoc-github-theme": "0.2.1"
 	},
 	"dependencies": {
