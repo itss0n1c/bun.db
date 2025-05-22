@@ -70,8 +70,6 @@ class BunSqliteDriver implements IDriver {
 
 export class BunDB extends QuickDB {
 	constructor(path: string) {
-		super({
-			driver: new BunSqliteDriver(path),
-		});
+		super({ driver: new BunSqliteDriver(path) });
 	}
 }

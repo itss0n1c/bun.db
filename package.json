@@ -1,6 +1,6 @@
 {
 	"name": "bun.db",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "A wrapper of quick.db for Bun.",
 	"license": "GPL-3.0-only",
 	"type": "module",
@@ -21,8 +21,8 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "1.2.8",
-		"typedoc-github-theme": "0.2.1"
+		"@types/bun": "1.2.14",
+		"typedoc-github-theme": "0.3.0"
 	},
 	"dependencies": {
 		"quick.db": "9.1.7"
