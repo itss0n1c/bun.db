@@ -8,9 +8,6 @@
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
-	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
 	"editor.codeActionsOnSave": ["source.formatDocument", "quickfix.biome", "source.organizeImports"],
 	"files.insertFinalNewline": true,
 	"files.eol": "\n",
