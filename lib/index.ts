@@ -19,7 +19,7 @@ class BunSqliteDriver implements IDriver {
 	}
 
 	async prepare(table: string): Promise<void> {
-		this._database.exec(`CREATE TABLE IF NOT EXISTS ${table} (ID TEXT PRIMARY KEY, json TEXT)`);
+		this._database.run(`CREATE TABLE IF NOT EXISTS ${table} (ID TEXT PRIMARY KEY, json TEXT)`);
 	}
 
 	async getAllRows(table: string): Promise<{ id: string; value: unknown }[]> {
