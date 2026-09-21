@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "TypeScript: Root Diagnostics",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"${workspaceFolder}/node_modules/@typescript/native/bin/tsc",
+				"--noEmit",
+				"--watch",
+				"--project",
+				"${workspaceFolder}/tsconfig.json"
+			],
+			"isBackground": true,
+			"problemMatcher": "$tsc-watch",
+			"presentation": {
+				"reveal": "never",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}

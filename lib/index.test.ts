@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { BunDB } from './index.js';
+import { BunDB } from './index.ts';
 
 const db = new BunDB('test.sqlite');
 

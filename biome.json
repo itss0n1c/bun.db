@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.13/schema.json",
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
 		"includes": ["**", "!!dist", "!!docs", "!!**/*.js"]
@@ -18,12 +18,24 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"correctness": {
-				"noUnusedImports": "error"
+			"preset": "recommended",
+			"suspicious": {
+				"noAssignInExpressions": "off"
 			},
-			"complexity": {
-				"noBannedTypes": "off"
+			"correctness": {
+				"noUnusedImports": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"noUnusedVariables": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"useImportExtensions": "error"
+			},
+			"style": {
+				"noParameterAssign": "off",
+				"useExportType": "error"
 			}
 		}
 	}
